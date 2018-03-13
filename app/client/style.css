@@ -1,0 +1,4 @@
+.landingImage {
+  background: url("/images/team.jpg") no-repeat center center fixed;
+  background-size: contain;
+}

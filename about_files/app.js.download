@@ -1,0 +1,1315 @@
+var require = meteorInstall({"client":{"template.main.js":function(){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// client/template.main.js                                                                                         //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+Meteor.startup(function() {
+  var attrs = {"style":"background: #21BA45"};
+  for (var prop in attrs) {
+    document.body.setAttribute(prop, attrs[prop]);
+  }
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"style.css":function(){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// client/style.css                                                                                                //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+// These styles have already been applied to the document.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"main.js":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// client/main.js                                                                                                  //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+module.watch(require("/imports/startup/both"));
+module.watch(require("../imports/startup/client/"));
+module.watch(require("./style.css"));
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}},"imports":{"api":{"stuff":{"index.js":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/api/stuff/index.js                                                                                      //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+module.watch(require("./stuff.js"));
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"stuff.js":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/api/stuff/stuff.js                                                                                      //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+module.export({
+  Stuffs: function () {
+    return Stuffs;
+  },
+  StuffSchema: function () {
+    return StuffSchema;
+  }
+});
+var Mongo;
+module.watch(require("meteor/mongo"), {
+  Mongo: function (v) {
+    Mongo = v;
+  }
+}, 0);
+var SimpleSchema;
+module.watch(require("simpl-schema"), {
+  "default": function (v) {
+    SimpleSchema = v;
+  }
+}, 1);
+var Tracker;
+module.watch(require("meteor/tracker"), {
+  Tracker: function (v) {
+    Tracker = v;
+  }
+}, 2);
+
+/** Create a Meteor collection. */
+var Stuffs = new Mongo.Collection('Stuffs');
+/** Create a schema to constrain the structure of documents associated with this collection. */
+
+var StuffSchema = new SimpleSchema({
+  name: String,
+  quantity: Number,
+  owner: String,
+  condition: {
+    type: String,
+    allowedValues: ['excellent', 'good', 'fair', 'poor'],
+    defaultValue: 'good'
+  }
+}, {
+  tracker: Tracker
+});
+/** Attach this schema to the collection. */
+
+Stuffs.attachSchema(StuffSchema);
+/** Make the collection and schema available to other code. */
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}}},"startup":{"both":{"index.js":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/startup/both/index.js                                                                                   //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+module.watch(require("/imports/api/stuff"));
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}},"client":{"index.js":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/startup/client/index.js                                                                                 //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+module.watch(require("./startup.jsx"));
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"startup.jsx":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/startup/client/startup.jsx                                                                              //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+var React;
+module.watch(require("react"), {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var render;
+module.watch(require("react-dom"), {
+  render: function (v) {
+    render = v;
+  }
+}, 1);
+var Meteor;
+module.watch(require("meteor/meteor"), {
+  Meteor: function (v) {
+    Meteor = v;
+  }
+}, 2);
+var App;
+module.watch(require("../../ui/layouts/App.jsx"), {
+  "default": function (v) {
+    App = v;
+  }
+}, 3);
+
+/** Startup the application by rendering the App layout component. */
+Meteor.startup(function () {
+  render(React.createElement(App, null), document.getElementById('root')); // eslint-disable-line
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}}},"ui":{"components":{"Footer.jsx":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/ui/components/Footer.jsx                                                                                //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+var _inheritsLoose = require("@babel/runtime/helpers/inheritsLoose");
+
+var React;
+module.watch(require("react"), {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+
+/** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
+var Footer =
+/*#__PURE__*/
+function (_React$Component) {
+  _inheritsLoose(Footer, _React$Component);
+
+  function Footer() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = Footer.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var divStyle = {
+        paddingTop: '15px',
+        color: 'white'
+      };
+      return React.createElement("footer", null, React.createElement("div", {
+        style: divStyle,
+        className: "ui center aligned container"
+      }, React.createElement("hr", null), "University of Hawaii", React.createElement("br", null), "Honolulu, HI 96822"));
+    }
+
+    return render;
+  }();
+
+  return Footer;
+}(React.Component);
+
+module.exportDefault(Footer);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"NavBar.jsx":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/ui/components/NavBar.jsx                                                                                //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+var _inheritsLoose = require("@babel/runtime/helpers/inheritsLoose");
+
+var React;
+module.watch(require("react"), {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var PropTypes;
+module.watch(require("prop-types"), {
+  "default": function (v) {
+    PropTypes = v;
+  }
+}, 1);
+var Meteor;
+module.watch(require("meteor/meteor"), {
+  Meteor: function (v) {
+    Meteor = v;
+  }
+}, 2);
+var withTracker;
+module.watch(require("meteor/react-meteor-data"), {
+  withTracker: function (v) {
+    withTracker = v;
+  }
+}, 3);
+var withRouter, NavLink;
+module.watch(require("react-router-dom"), {
+  withRouter: function (v) {
+    withRouter = v;
+  },
+  NavLink: function (v) {
+    NavLink = v;
+  }
+}, 4);
+var Menu, Icon, Dropdown, Header;
+module.watch(require("semantic-ui-react"), {
+  Menu: function (v) {
+    Menu = v;
+  },
+  Icon: function (v) {
+    Icon = v;
+  },
+  Dropdown: function (v) {
+    Dropdown = v;
+  },
+  Header: function (v) {
+    Header = v;
+  }
+}, 5);
+var Roles;
+module.watch(require("meteor/alanning:roles"), {
+  Roles: function (v) {
+    Roles = v;
+  }
+}, 6);
+
+/** The NavBar appears at the top of every page. Rendered by the App Layout component. */
+var NavBar =
+/*#__PURE__*/
+function (_React$Component) {
+  _inheritsLoose(NavBar, _React$Component);
+
+  function NavBar() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = NavBar.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var menuStyle = {
+        marginBottom: '10px',
+        borderRadius: '0'
+      };
+      return React.createElement(Menu, {
+        color: "green",
+        style: menuStyle,
+        attached: "top",
+        borderless: true,
+        inverted: true
+      }, React.createElement(Menu.Item, {
+        as: NavLink,
+        activeClassName: "",
+        exact: true,
+        to: "/"
+      }, React.createElement(Header, {
+        inverted: true,
+        as: "h1"
+      }, "HKN 18")), React.createElement(Menu.Item, {
+        position: "right",
+        as: NavLink,
+        to: "/about",
+        inverted: true
+      }, React.createElement("a", null, "About Us")), React.createElement(Menu.Item, {
+        as: NavLink,
+        to: "/courses"
+      }, React.createElement("a", {
+        inverted: true
+      }, "Courses")), React.createElement(Menu.Item, null, React.createElement("a", {
+        inverted: true
+      }, "Search ", React.createElement(Icon, {
+        name: "search"
+      }))));
+    }
+
+    return render;
+  }();
+
+  return NavBar;
+}(React.Component);
+/** Declare the types of all properties. */
+
+
+NavBar.propTypes = {
+  currentUser: PropTypes.string
+};
+/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+
+var NavBarContainer = withTracker(function () {
+  return {
+    currentUser: Meteor.user() ? Meteor.user().username : ''
+  };
+})(NavBar);
+/** Enable ReactRouter for this component. https://reacttraining.com/react-router/web/api/withRouter */
+
+module.exportDefault(withRouter(NavBarContainer));
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}},"layouts":{"App.jsx":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/ui/layouts/App.jsx                                                                                      //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+var _extends = require("@babel/runtime/helpers/extends");
+
+var _objectWithoutProperties = require("@babel/runtime/helpers/objectWithoutProperties");
+
+var _inheritsLoose = require("@babel/runtime/helpers/inheritsLoose");
+
+var React;
+module.watch(require("react"), {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var PropTypes;
+module.watch(require("prop-types"), {
+  "default": function (v) {
+    PropTypes = v;
+  }
+}, 1);
+var Meteor;
+module.watch(require("meteor/meteor"), {
+  Meteor: function (v) {
+    Meteor = v;
+  }
+}, 2);
+module.watch(require("semantic-ui-css/semantic.css"));
+var Roles;
+module.watch(require("meteor/alanning:roles"), {
+  Roles: function (v) {
+    Roles = v;
+  }
+}, 3);
+var Router, Route, Switch, Redirect;
+module.watch(require("react-router-dom"), {
+  HashRouter: function (v) {
+    Router = v;
+  },
+  Route: function (v) {
+    Route = v;
+  },
+  Switch: function (v) {
+    Switch = v;
+  },
+  Redirect: function (v) {
+    Redirect = v;
+  }
+}, 4);
+var NavBar;
+module.watch(require("../components/NavBar"), {
+  "default": function (v) {
+    NavBar = v;
+  }
+}, 5);
+var Footer;
+module.watch(require("../components/Footer"), {
+  "default": function (v) {
+    Footer = v;
+  }
+}, 6);
+var Landing;
+module.watch(require("../pages/Landing"), {
+  "default": function (v) {
+    Landing = v;
+  }
+}, 7);
+var NotFound;
+module.watch(require("../pages/NotFound"), {
+  "default": function (v) {
+    NotFound = v;
+  }
+}, 8);
+var Signin;
+module.watch(require("../pages/Signin"), {
+  "default": function (v) {
+    Signin = v;
+  }
+}, 9);
+var Signup;
+module.watch(require("../pages/Signup"), {
+  "default": function (v) {
+    Signup = v;
+  }
+}, 10);
+var Signout;
+module.watch(require("../pages/Signout"), {
+  "default": function (v) {
+    Signout = v;
+  }
+}, 11);
+var About;
+module.watch(require("../pages/About"), {
+  "default": function (v) {
+    About = v;
+  }
+}, 12);
+var Courses;
+module.watch(require("../pages/Courses"), {
+  "default": function (v) {
+    Courses = v;
+  }
+}, 13);
+
+/** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
+var App =
+/*#__PURE__*/
+function (_React$Component) {
+  _inheritsLoose(App, _React$Component);
+
+  function App() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = App.prototype;
+
+  _proto.render = function () {
+    function render() {
+      return React.createElement(Router, null, React.createElement("div", null, React.createElement(NavBar, null), React.createElement(Switch, null, React.createElement(Route, {
+        exact: true,
+        path: "/",
+        component: Landing
+      }), React.createElement(Route, {
+        path: "/about",
+        component: About
+      }), React.createElement(Route, {
+        path: "/courses",
+        component: Courses
+      }), React.createElement(Route, {
+        path: "/signin",
+        component: Signin
+      }), React.createElement(Route, {
+        path: "/signup",
+        component: Signup
+      }), React.createElement(ProtectedRoute, {
+        path: "/signout",
+        component: Signout
+      }), React.createElement(Route, {
+        component: NotFound
+      })), React.createElement(Footer, null)));
+    }
+
+    return render;
+  }();
+
+  return App;
+}(React.Component);
+/**
+ * ProtectedRoute (see React Router v4 sample)
+ * Checks for Meteor login before routing to the requested page, otherwise goes to signin page.
+ * @param {any} { component: Component, ...rest }
+ */
+
+
+var ProtectedRoute = function (_ref) {
+  var Component = _ref.component,
+      rest = _objectWithoutProperties(_ref, ["component"]);
+
+  return React.createElement(Route, _extends({}, rest, {
+    render: function (props) {
+      var isLogged = Meteor.userId() !== null;
+      return isLogged ? React.createElement(Component, props) : React.createElement(Redirect, {
+        to: {
+          pathname: '/signin',
+          state: {
+            from: props.location
+          }
+        }
+      });
+    }
+  }));
+};
+/**
+ * AdminProtectedRoute (see React Router v4 sample)
+ * Checks for Meteor login and admin role before routing to the requested page, otherwise goes to signin page.
+ * @param {any} { component: Component, ...rest }
+ */
+
+
+var AdminProtectedRoute = function (_ref2) {
+  var Component = _ref2.component,
+      rest = _objectWithoutProperties(_ref2, ["component"]);
+
+  return React.createElement(Route, _extends({}, rest, {
+    render: function (props) {
+      var isLogged = Meteor.userId() !== null;
+      var isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
+      return isLogged && isAdmin ? React.createElement(Component, props) : React.createElement(Redirect, {
+        to: {
+          pathname: '/signin',
+          state: {
+            from: props.location
+          }
+        }
+      });
+    }
+  }));
+};
+/** Require a component and location to be passed to each ProtectedRoute. */
+
+
+ProtectedRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+  location: PropTypes.object
+};
+/** Require a component and location to be passed to each AdminProtectedRoute. */
+
+AdminProtectedRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+  location: PropTypes.object
+};
+module.exportDefault(App);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}},"pages":{"About.jsx":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/ui/pages/About.jsx                                                                                      //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+var _inheritsLoose = require("@babel/runtime/helpers/inheritsLoose");
+
+module.export({
+  "default": function () {
+    return About;
+  }
+});
+var React;
+module.watch(require("react"), {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Container, Form, Grid, Header, Segment;
+module.watch(require("semantic-ui-react"), {
+  Container: function (v) {
+    Container = v;
+  },
+  Form: function (v) {
+    Form = v;
+  },
+  Grid: function (v) {
+    Grid = v;
+  },
+  Header: function (v) {
+    Header = v;
+  },
+  Segment: function (v) {
+    Segment = v;
+  }
+}, 1);
+
+var About =
+/*#__PURE__*/
+function (_React$Component) {
+  _inheritsLoose(About, _React$Component);
+
+  function About() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = About.prototype;
+
+  /** Render the signin form. */
+  _proto.render = function () {
+    function render() {
+      return React.createElement(Container, null, React.createElement(Grid, {
+        textAlign: "center",
+        verticalAlign: "middle",
+        centered: true,
+        columns: 2
+      }, React.createElement(Grid.Column, null, React.createElement(Header, {
+        as: "h2",
+        textAlign: "center"
+      }, "Login to your account"), React.createElement(Form, {
+        onSubmit: this.handleSubmit
+      }, React.createElement(Segment, {
+        stacked: true
+      }, React.createElement(Form.Input, {
+        label: "Email",
+        icon: "user",
+        iconPosition: "left",
+        name: "email",
+        type: "email",
+        placeholder: "E-mail address",
+        onChange: this.handleChange
+      }), React.createElement(Form.Input, {
+        label: "Password",
+        icon: "lock",
+        iconPosition: "left",
+        name: "password",
+        placeholder: "Password",
+        type: "password",
+        onChange: this.handleChange
+      }), React.createElement(Form.Button, {
+        content: "Submit"
+      }))))));
+    }
+
+    return render;
+  }();
+
+  return About;
+}(React.Component);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"Courses.jsx":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/ui/pages/Courses.jsx                                                                                    //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+var _inheritsLoose = require("@babel/runtime/helpers/inheritsLoose");
+
+module.export({
+  "default": function () {
+    return Courses;
+  }
+});
+var React;
+module.watch(require("react"), {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Container, Form, Grid, Header, Segment;
+module.watch(require("semantic-ui-react"), {
+  Container: function (v) {
+    Container = v;
+  },
+  Form: function (v) {
+    Form = v;
+  },
+  Grid: function (v) {
+    Grid = v;
+  },
+  Header: function (v) {
+    Header = v;
+  },
+  Segment: function (v) {
+    Segment = v;
+  }
+}, 1);
+
+var Courses =
+/*#__PURE__*/
+function (_React$Component) {
+  _inheritsLoose(Courses, _React$Component);
+
+  function Courses() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = Courses.prototype;
+
+  /** Render the signin form. */
+  _proto.render = function () {
+    function render() {
+      return React.createElement(Container, null, React.createElement(Grid, {
+        textAlign: "center",
+        verticalAlign: "middle",
+        centered: true,
+        columns: 2
+      }, React.createElement(Grid.Column, null, React.createElement(Header, {
+        as: "h2",
+        textAlign: "center"
+      }, "Login to your account"), React.createElement(Form, {
+        onSubmit: this.handleSubmit
+      }, React.createElement(Segment, {
+        stacked: true
+      }, React.createElement(Form.Input, {
+        label: "Email",
+        icon: "user",
+        iconPosition: "left",
+        name: "email",
+        type: "email",
+        placeholder: "E-mail address",
+        onChange: this.handleChange
+      }), React.createElement(Form.Input, {
+        label: "Password",
+        icon: "lock",
+        iconPosition: "left",
+        name: "password",
+        placeholder: "Password",
+        type: "password",
+        onChange: this.handleChange
+      }), React.createElement(Form.Button, {
+        content: "Submit"
+      }))))));
+    }
+
+    return render;
+  }();
+
+  return Courses;
+}(React.Component);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"Landing.jsx":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/ui/pages/Landing.jsx                                                                                    //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+var _inheritsLoose = require("@babel/runtime/helpers/inheritsLoose");
+
+var React;
+module.watch(require("react"), {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Grid, Image;
+module.watch(require("semantic-ui-react"), {
+  Grid: function (v) {
+    Grid = v;
+  },
+  Image: function (v) {
+    Image = v;
+  }
+}, 1);
+
+/** A simple static component to render some text for the landing page. */
+var Landing =
+/*#__PURE__*/
+function (_React$Component) {
+  _inheritsLoose(Landing, _React$Component);
+
+  function Landing() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = Landing.prototype;
+
+  _proto.render = function () {
+    function render() {
+      return React.createElement("div", {
+        className: "landingImage"
+      });
+    }
+
+    return render;
+  }();
+
+  return Landing;
+}(React.Component);
+
+module.exportDefault(Landing);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"NotFound.jsx":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/ui/pages/NotFound.jsx                                                                                   //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+var _inheritsLoose = require("@babel/runtime/helpers/inheritsLoose");
+
+var React;
+module.watch(require("react"), {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Header;
+module.watch(require("semantic-ui-react"), {
+  Header: function (v) {
+    Header = v;
+  }
+}, 1);
+
+/** Render a Not Found page if the user enters a URL that doesn't match any route. */
+var NotFound =
+/*#__PURE__*/
+function (_React$Component) {
+  _inheritsLoose(NotFound, _React$Component);
+
+  function NotFound() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = NotFound.prototype;
+
+  _proto.render = function () {
+    function render() {
+      return React.createElement(Header, {
+        as: "h2",
+        textAlign: "center"
+      }, React.createElement("p", null, "Page not found"));
+    }
+
+    return render;
+  }();
+
+  return NotFound;
+}(React.Component);
+
+module.exportDefault(NotFound);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"Signin.jsx":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/ui/pages/Signin.jsx                                                                                     //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+var _inheritsLoose = require("@babel/runtime/helpers/inheritsLoose");
+
+var _assertThisInitialized = require("@babel/runtime/helpers/assertThisInitialized");
+
+module.export({
+  "default": function () {
+    return Signin;
+  }
+});
+var React;
+module.watch(require("react"), {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var PropTypes;
+module.watch(require("prop-types"), {
+  "default": function (v) {
+    PropTypes = v;
+  }
+}, 1);
+var Link, Redirect;
+module.watch(require("react-router-dom"), {
+  Link: function (v) {
+    Link = v;
+  },
+  Redirect: function (v) {
+    Redirect = v;
+  }
+}, 2);
+var Meteor;
+module.watch(require("meteor/meteor"), {
+  Meteor: function (v) {
+    Meteor = v;
+  }
+}, 3);
+var Container, Form, Grid, Header, Message, Segment;
+module.watch(require("semantic-ui-react"), {
+  Container: function (v) {
+    Container = v;
+  },
+  Form: function (v) {
+    Form = v;
+  },
+  Grid: function (v) {
+    Grid = v;
+  },
+  Header: function (v) {
+    Header = v;
+  },
+  Message: function (v) {
+    Message = v;
+  },
+  Segment: function (v) {
+    Segment = v;
+  }
+}, 4);
+
+var Signin =
+/*#__PURE__*/
+function (_React$Component) {
+  _inheritsLoose(Signin, _React$Component);
+
+  /** Initialize component state with properties for login and redirection. */
+  function Signin(props) {
+    var _this;
+
+    _this = _React$Component.call(this, props) || this;
+    _this.state = {
+      email: '',
+      password: '',
+      error: '',
+      redirectToReferer: false
+    }; // Ensure that 'this' is bound to this component in these two functions.
+    // https://medium.freecodecamp.org/react-binding-patterns-5-approaches-for-handling-this-92c651b5af56
+
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+  /** Update the form controls each time the user interacts with them. */
+
+
+  var _proto = Signin.prototype;
+
+  _proto.handleChange = function () {
+    function handleChange(e, _ref) {
+      var _setState;
+
+      var name = _ref.name,
+          value = _ref.value;
+      this.setState((_setState = {}, _setState[name] = value, _setState));
+    }
+
+    return handleChange;
+  }();
+  /** Handle Signin submission using Meteor's account mechanism. */
+
+
+  _proto.handleSubmit = function () {
+    function handleSubmit() {
+      var _this2 = this;
+
+      var _state = this.state,
+          email = _state.email,
+          password = _state.password;
+      Meteor.loginWithPassword(email, password, function (err) {
+        if (err) {
+          _this2.setState({
+            error: err.reason
+          });
+        } else {
+          _this2.setState({
+            error: '',
+            redirectToReferer: true
+          });
+        }
+      });
+    }
+
+    return handleSubmit;
+  }();
+  /** Render the signin form. */
+
+
+  _proto.render = function () {
+    function render() {
+      var _ref2 = this.props.location.state || {
+        from: {
+          pathname: '/'
+        }
+      },
+          from = _ref2.from; // if correct authentication, redirect to page instead of login screen
+
+
+      if (this.state.redirectToReferer) {
+        return React.createElement(Redirect, {
+          to: from
+        });
+      } // Otherwise return the Login form.
+
+
+      return React.createElement(Container, null, React.createElement(Grid, {
+        textAlign: "center",
+        verticalAlign: "middle",
+        centered: true,
+        columns: 2
+      }, React.createElement(Grid.Column, null, React.createElement(Header, {
+        as: "h2",
+        textAlign: "center"
+      }, "Login to your account"), React.createElement(Form, {
+        onSubmit: this.handleSubmit
+      }, React.createElement(Segment, {
+        stacked: true
+      }, React.createElement(Form.Input, {
+        label: "Email",
+        icon: "user",
+        iconPosition: "left",
+        name: "email",
+        type: "email",
+        placeholder: "E-mail address",
+        onChange: this.handleChange
+      }), React.createElement(Form.Input, {
+        label: "Password",
+        icon: "lock",
+        iconPosition: "left",
+        name: "password",
+        placeholder: "Password",
+        type: "password",
+        onChange: this.handleChange
+      }), React.createElement(Form.Button, {
+        content: "Submit"
+      }))), React.createElement(Message, null, React.createElement(Link, {
+        to: "/signup"
+      }, "Click here to Register")), this.state.error === '' ? '' : React.createElement(Message, {
+        error: true,
+        header: "Login was not successful",
+        content: this.state.error
+      }))));
+    }
+
+    return render;
+  }();
+
+  return Signin;
+}(React.Component);
+
+/** Ensure that the React Router location object is available in case we need to redirect. */
+Signin.propTypes = {
+  location: PropTypes.object
+};
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"Signout.jsx":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/ui/pages/Signout.jsx                                                                                    //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+var _inheritsLoose = require("@babel/runtime/helpers/inheritsLoose");
+
+module.export({
+  "default": function () {
+    return Signout;
+  }
+});
+var React;
+module.watch(require("react"), {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Meteor;
+module.watch(require("meteor/meteor"), {
+  Meteor: function (v) {
+    Meteor = v;
+  }
+}, 1);
+var Header;
+module.watch(require("semantic-ui-react"), {
+  Header: function (v) {
+    Header = v;
+  }
+}, 2);
+
+var Signout =
+/*#__PURE__*/
+function (_React$Component) {
+  _inheritsLoose(Signout, _React$Component);
+
+  function Signout() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = Signout.prototype;
+
+  _proto.render = function () {
+    function render() {
+      Meteor.logout();
+      return React.createElement(Header, {
+        as: "h2",
+        textAlign: "center"
+      }, React.createElement("p", null, "You are signed out."));
+    }
+
+    return render;
+  }();
+
+  return Signout;
+}(React.Component);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"Signup.jsx":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/ui/pages/Signup.jsx                                                                                     //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+var _inheritsLoose = require("@babel/runtime/helpers/inheritsLoose");
+
+var _assertThisInitialized = require("@babel/runtime/helpers/assertThisInitialized");
+
+module.export({
+  "default": function () {
+    return Signup;
+  }
+});
+var React;
+module.watch(require("react"), {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Link;
+module.watch(require("react-router-dom"), {
+  Link: function (v) {
+    Link = v;
+  }
+}, 1);
+var Container, Form, Grid, Header, Message, Segment;
+module.watch(require("semantic-ui-react"), {
+  Container: function (v) {
+    Container = v;
+  },
+  Form: function (v) {
+    Form = v;
+  },
+  Grid: function (v) {
+    Grid = v;
+  },
+  Header: function (v) {
+    Header = v;
+  },
+  Message: function (v) {
+    Message = v;
+  },
+  Segment: function (v) {
+    Segment = v;
+  }
+}, 2);
+var Accounts;
+module.watch(require("meteor/accounts-base"), {
+  Accounts: function (v) {
+    Accounts = v;
+  }
+}, 3);
+
+var Signup =
+/*#__PURE__*/
+function (_React$Component) {
+  _inheritsLoose(Signup, _React$Component);
+
+  /** Initialize state fields. */
+  function Signup(props) {
+    var _this;
+
+    _this = _React$Component.call(this, props) || this;
+    _this.state = {
+      email: '',
+      password: '',
+      error: ''
+    }; // Ensure that 'this' is bound to this component in these two functions.
+    // https://medium.freecodecamp.org/react-binding-patterns-5-approaches-for-handling-this-92c651b5af56
+
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+  /** Update the form controls each time the user interacts with them. */
+
+
+  var _proto = Signup.prototype;
+
+  _proto.handleChange = function () {
+    function handleChange(e, _ref) {
+      var _setState;
+
+      var name = _ref.name,
+          value = _ref.value;
+      this.setState((_setState = {}, _setState[name] = value, _setState));
+    }
+
+    return handleChange;
+  }();
+  /** Handle Signup submission using Meteor's account mechanism. */
+
+
+  _proto.handleSubmit = function () {
+    function handleSubmit() {
+      var _this2 = this;
+
+      var _state = this.state,
+          email = _state.email,
+          password = _state.password;
+      Accounts.createUser({
+        email: email,
+        username: email,
+        password: password
+      }, function (err) {
+        if (err) {
+          _this2.setState({
+            error: err.reason
+          });
+        } else {// browserHistory.push('/login');
+        }
+      });
+    }
+
+    return handleSubmit;
+  }();
+  /** Display the signup form. */
+
+
+  _proto.render = function () {
+    function render() {
+      return React.createElement(Container, null, React.createElement(Grid, {
+        textAlign: "center",
+        verticalAlign: "middle",
+        centered: true,
+        columns: 2
+      }, React.createElement(Grid.Column, null, React.createElement(Header, {
+        as: "h2",
+        textAlign: "center"
+      }, "Register your account"), React.createElement(Form, {
+        onSubmit: this.handleSubmit
+      }, React.createElement(Segment, {
+        stacked: true
+      }, React.createElement(Form.Input, {
+        label: "Email",
+        icon: "user",
+        iconPosition: "left",
+        name: "email",
+        type: "email",
+        placeholder: "E-mail address",
+        onChange: this.handleChange
+      }), React.createElement(Form.Input, {
+        label: "Password",
+        icon: "lock",
+        iconPosition: "left",
+        name: "password",
+        placeholder: "Password",
+        type: "password",
+        onChange: this.handleChange
+      }), React.createElement(Form.Button, {
+        content: "Submit"
+      }))), React.createElement(Message, null, "Already have an account? Login ", React.createElement(Link, {
+        to: "/signin"
+      }, "here")), this.state.error === '' ? '' : React.createElement(Message, {
+        error: true,
+        header: "Registration was not successful",
+        content: this.state.error
+      }))));
+    }
+
+    return render;
+  }();
+
+  return Signup;
+}(React.Component);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}}}}},{
+  "extensions": [
+    ".js",
+    ".json",
+    ".html",
+    ".css",
+    ".jsx"
+  ]
+});
+require("/client/template.main.js");
+require("/client/main.js");
