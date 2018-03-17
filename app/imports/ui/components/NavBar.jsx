@@ -22,7 +22,7 @@ class NavBar extends React.Component {
           <a>Courses</a>
         </Menu.Item>
         <Menu.Item>
-          <a>Search <Icon name='search'/></a>
+          <a>Search</a>
         </Menu.Item>
       </Menu>
     );

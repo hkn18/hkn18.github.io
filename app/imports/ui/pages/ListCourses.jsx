@@ -7,6 +7,17 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 
 class ListCourses extends React.Component {
+  classData = [
+      {
+        className: 'Test',
+        description: 'Information about class1'
+      },
+      {
+        className: 'Test2',
+        description: 'Information about class2'
+      },
+  ]
+
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader>Getting data</Loader>;
@@ -16,7 +27,7 @@ class ListCourses extends React.Component {
     return (
         <Container>
           <Card.Group>
-            {this.props.courses.map((course, index) => <CourseCard course={course} key={index} />)}
+            {this.classData.map((course, index) => <CourseCard course={course} key={index} />)}
           </Card.Group>
         </Container>
     );
