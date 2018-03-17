@@ -412,9 +412,7 @@ function (_React$Component) {
       }, React.createElement("a", null, "About Us")), React.createElement(Menu.Item, {
         as: NavLink,
         to: "/courses"
-      }, React.createElement("a", null, "Courses")), React.createElement(Menu.Item, null, React.createElement("a", null, "Search ", React.createElement(Icon, {
-        name: "search"
-      }))));
+      }, React.createElement("a", null, "Courses")), React.createElement(Menu.Item, null, React.createElement("a", null, "Search")));
     }
 
     return render;
@@ -815,6 +813,8 @@ module.exportDefault(Landing);
 //                                                                                                                 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                                    //
+var _assertThisInitialized = require("@babel/runtime/helpers/assertThisInitialized");
+
 var _inheritsLoose = require("@babel/runtime/helpers/inheritsLoose");
 
 var React;
@@ -872,7 +872,19 @@ function (_React$Component) {
   _inheritsLoose(ListCourses, _React$Component);
 
   function ListCourses() {
-    return _React$Component.apply(this, arguments) || this;
+    var _temp, _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return (_temp = _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this, _this.classData = [{
+      className: 'Test',
+      description: 'Information about class1'
+    }, {
+      className: 'Test2',
+      description: 'Information about class2'
+    }], _temp) || _assertThisInitialized(_this);
   }
 
   var _proto = ListCourses.prototype;
@@ -888,7 +900,7 @@ function (_React$Component) {
 
   _proto.renderPage = function () {
     function renderPage() {
-      return React.createElement(Container, null, React.createElement(Card.Group, null, this.props.courses.map(function (course, index) {
+      return React.createElement(Container, null, React.createElement(Card.Group, null, this.classData.map(function (course, index) {
         return React.createElement(CourseCard, {
           course: course,
           key: index
