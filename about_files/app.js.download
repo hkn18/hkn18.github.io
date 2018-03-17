@@ -1,46 +1,66 @@
-var require = meteorInstall({"client":{"template.main.js":function(){
+var require = meteorInstall({"imports":{"api":{"course":{"course.js":function(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                 //
-// client/template.main.js                                                                                         //
+// imports/api/course/course.js                                                                                    //
 //                                                                                                                 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                                    //
-Meteor.startup(function() {
-  var attrs = {"style":"background: #21BA45"};
-  for (var prop in attrs) {
-    document.body.setAttribute(prop, attrs[prop]);
+module.export({
+  Courses: function () {
+    return Courses;
+  },
+  CourseSchema: function () {
+    return CourseSchema;
   }
 });
+var Mongo;
+module.watch(require("meteor/mongo"), {
+  Mongo: function (v) {
+    Mongo = v;
+  }
+}, 0);
+var SimpleSchema;
+module.watch(require("simpl-schema"), {
+  "default": function (v) {
+    SimpleSchema = v;
+  }
+}, 1);
+var Tracker;
+module.watch(require("meteor/tracker"), {
+  Tracker: function (v) {
+    Tracker = v;
+  }
+}, 2);
 
+/** Create a Meteor collection. */
+var Courses = new Mongo.Collection('Courses');
+/** Create a schema to constrain the structure of documents associated with this collection. */
+
+var CourseSchema = new SimpleSchema({
+  className: String,
+  description: String
+}, {
+  tracker: Tracker
+});
+/** Attach this schema to the collection. */
+
+Courses.attachSchema(CourseSchema);
+/** Make the collection and schema available to other code. */
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-},"style.css":function(){
+},"index.js":function(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                 //
-// client/style.css                                                                                                //
+// imports/api/course/index.js                                                                                     //
 //                                                                                                                 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                                    //
-// These styles have already been applied to the document.
-
+module.watch(require("./course.js"));
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-},"main.js":function(require,exports,module){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                 //
-// client/main.js                                                                                                  //
-//                                                                                                                 //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                   //
-module.watch(require("/imports/startup/both"));
-module.watch(require("../imports/startup/client/"));
-module.watch(require("./style.css"));
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-}},"imports":{"api":{"stuff":{"index.js":function(require,exports,module){
+}},"stuff":{"index.js":function(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                 //
@@ -117,6 +137,7 @@ Stuffs.attachSchema(StuffSchema);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                                    //
 module.watch(require("/imports/api/stuff"));
+module.watch(require("/imports/api/course"));
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }},"client":{"index.js":function(require,exports,module){
@@ -169,7 +190,76 @@ Meteor.startup(function () {
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}}},"ui":{"components":{"Footer.jsx":function(require,exports,module){
+}}},"ui":{"components":{"CourseCard.jsx":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/ui/components/CourseCard.jsx                                                                            //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+var _inheritsLoose = require("@babel/runtime/helpers/inheritsLoose");
+
+var React;
+module.watch(require("react"), {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Card;
+module.watch(require("semantic-ui-react"), {
+  Card: function (v) {
+    Card = v;
+  }
+}, 1);
+var PropTypes;
+module.watch(require("prop-types"), {
+  "default": function (v) {
+    PropTypes = v;
+  }
+}, 2);
+var withRouter;
+module.watch(require("react-router-dom"), {
+  withRouter: function (v) {
+    withRouter = v;
+  }
+}, 3);
+
+/** The CourseCard will display on the course listing page */
+var CourseCard =
+/*#__PURE__*/
+function (_React$Component) {
+  _inheritsLoose(CourseCard, _React$Component);
+
+  function CourseCard() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = CourseCard.prototype;
+
+  _proto.render = function () {
+    function render() {
+      return React.createElement(Card, null, React.createElement(Card.Content, null, React.createElement(Card.Header, null, this.props.course.className), React.createElement(Card.Description, null, this.props.course.description)));
+    }
+
+    return render;
+  }();
+
+  return CourseCard;
+}(React.Component);
+/** Require an array of Stuff documents in the props. */
+
+
+CourseCard.propTypes = {
+  course: PropTypes.array.isRequired,
+  ready: PropTypes.bool.isRequired
+};
+/** Wrap this component in withRouter since we use the <Link> React Router element. */
+
+module.exportDefault(withRouter(CourseCard));
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"Footer.jsx":function(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                 //
@@ -201,8 +291,7 @@ function (_React$Component) {
   _proto.render = function () {
     function render() {
       var divStyle = {
-        paddingTop: '15px',
-        color: 'white'
+        paddingTop: '15px'
       };
       return React.createElement("footer", null, React.createElement("div", {
         style: divStyle,
@@ -319,16 +408,11 @@ function (_React$Component) {
       }, "HKN 18")), React.createElement(Menu.Item, {
         position: "right",
         as: NavLink,
-        to: "/about",
-        inverted: true
+        to: "/about"
       }, React.createElement("a", null, "About Us")), React.createElement(Menu.Item, {
         as: NavLink,
         to: "/courses"
-      }, React.createElement("a", {
-        inverted: true
-      }, "Courses")), React.createElement(Menu.Item, null, React.createElement("a", {
-        inverted: true
-      }, "Search ", React.createElement(Icon, {
+      }, React.createElement("a", null, "Courses")), React.createElement(Menu.Item, null, React.createElement("a", null, "Search ", React.createElement(Icon, {
         name: "search"
       }))));
     }
@@ -422,46 +506,46 @@ module.watch(require("../components/Footer"), {
     Footer = v;
   }
 }, 6);
+var ListCourses;
+module.watch(require("../pages/ListCourses"), {
+  "default": function (v) {
+    ListCourses = v;
+  }
+}, 7);
 var Landing;
 module.watch(require("../pages/Landing"), {
   "default": function (v) {
     Landing = v;
   }
-}, 7);
+}, 8);
 var NotFound;
 module.watch(require("../pages/NotFound"), {
   "default": function (v) {
     NotFound = v;
   }
-}, 8);
+}, 9);
 var Signin;
 module.watch(require("../pages/Signin"), {
   "default": function (v) {
     Signin = v;
   }
-}, 9);
+}, 10);
 var Signup;
 module.watch(require("../pages/Signup"), {
   "default": function (v) {
     Signup = v;
   }
-}, 10);
+}, 11);
 var Signout;
 module.watch(require("../pages/Signout"), {
   "default": function (v) {
     Signout = v;
   }
-}, 11);
+}, 12);
 var About;
 module.watch(require("../pages/About"), {
   "default": function (v) {
     About = v;
-  }
-}, 12);
-var Courses;
-module.watch(require("../pages/Courses"), {
-  "default": function (v) {
-    Courses = v;
   }
 }, 13);
 
@@ -488,7 +572,7 @@ function (_React$Component) {
         component: About
       }), React.createElement(Route, {
         path: "/courses",
-        component: Courses
+        component: ListCourses
       }), React.createElement(Route, {
         path: "/signin",
         component: Signin
@@ -669,100 +753,6 @@ function (_React$Component) {
 }(React.Component);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-},"Courses.jsx":function(require,exports,module){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                 //
-// imports/ui/pages/Courses.jsx                                                                                    //
-//                                                                                                                 //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                   //
-var _inheritsLoose = require("@babel/runtime/helpers/inheritsLoose");
-
-module.export({
-  "default": function () {
-    return Courses;
-  }
-});
-var React;
-module.watch(require("react"), {
-  "default": function (v) {
-    React = v;
-  }
-}, 0);
-var Container, Form, Grid, Header, Segment;
-module.watch(require("semantic-ui-react"), {
-  Container: function (v) {
-    Container = v;
-  },
-  Form: function (v) {
-    Form = v;
-  },
-  Grid: function (v) {
-    Grid = v;
-  },
-  Header: function (v) {
-    Header = v;
-  },
-  Segment: function (v) {
-    Segment = v;
-  }
-}, 1);
-
-var Courses =
-/*#__PURE__*/
-function (_React$Component) {
-  _inheritsLoose(Courses, _React$Component);
-
-  function Courses() {
-    return _React$Component.apply(this, arguments) || this;
-  }
-
-  var _proto = Courses.prototype;
-
-  /** Render the signin form. */
-  _proto.render = function () {
-    function render() {
-      return React.createElement(Container, null, React.createElement(Grid, {
-        textAlign: "center",
-        verticalAlign: "middle",
-        centered: true,
-        columns: 2
-      }, React.createElement(Grid.Column, null, React.createElement(Header, {
-        as: "h2",
-        textAlign: "center"
-      }, "Login to your account"), React.createElement(Form, {
-        onSubmit: this.handleSubmit
-      }, React.createElement(Segment, {
-        stacked: true
-      }, React.createElement(Form.Input, {
-        label: "Email",
-        icon: "user",
-        iconPosition: "left",
-        name: "email",
-        type: "email",
-        placeholder: "E-mail address",
-        onChange: this.handleChange
-      }), React.createElement(Form.Input, {
-        label: "Password",
-        icon: "lock",
-        iconPosition: "left",
-        name: "password",
-        placeholder: "Password",
-        type: "password",
-        onChange: this.handleChange
-      }), React.createElement(Form.Button, {
-        content: "Submit"
-      }))))));
-    }
-
-    return render;
-  }();
-
-  return Courses;
-}(React.Component);
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 },"Landing.jsx":function(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -815,6 +805,119 @@ function (_React$Component) {
 }(React.Component);
 
 module.exportDefault(Landing);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"ListCourses.jsx":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// imports/ui/pages/ListCourses.jsx                                                                                //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+var _inheritsLoose = require("@babel/runtime/helpers/inheritsLoose");
+
+var React;
+module.watch(require("react"), {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Courses;
+module.watch(require("/imports/api/course/course"), {
+  Courses: function (v) {
+    Courses = v;
+  }
+}, 1);
+var CourseCard;
+module.watch(require("/imports/ui/components/CourseCard"), {
+  "default": function (v) {
+    CourseCard = v;
+  }
+}, 2);
+var Container, Card, Loader;
+module.watch(require("semantic-ui-react"), {
+  Container: function (v) {
+    Container = v;
+  },
+  Card: function (v) {
+    Card = v;
+  },
+  Loader: function (v) {
+    Loader = v;
+  }
+}, 3);
+var Meteor;
+module.watch(require("meteor/meteor"), {
+  Meteor: function (v) {
+    Meteor = v;
+  }
+}, 4);
+var withTracker;
+module.watch(require("meteor/react-meteor-data"), {
+  withTracker: function (v) {
+    withTracker = v;
+  }
+}, 5);
+var PropTypes;
+module.watch(require("prop-types"), {
+  "default": function (v) {
+    PropTypes = v;
+  }
+}, 6);
+
+var ListCourses =
+/*#__PURE__*/
+function (_React$Component) {
+  _inheritsLoose(ListCourses, _React$Component);
+
+  function ListCourses() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = ListCourses.prototype;
+
+  /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
+  _proto.render = function () {
+    function render() {
+      return this.props.ready ? this.renderPage() : React.createElement(Loader, null, "Getting data");
+    }
+
+    return render;
+  }();
+
+  _proto.renderPage = function () {
+    function renderPage() {
+      return React.createElement(Container, null, React.createElement(Card.Group, null, this.props.courses.map(function (course, index) {
+        return React.createElement(CourseCard, {
+          course: course,
+          key: index
+        });
+      })));
+    }
+
+    return renderPage;
+  }();
+
+  return ListCourses;
+}(React.Component);
+/** Require an array of Stuff documents in the props. */
+
+
+ListCourses.propTypes = {
+  courses: PropTypes.array.isRequired,
+  ready: PropTypes.bool.isRequired
+};
+/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+
+module.exportDefault(withTracker(function () {
+  // Get access to Stuff documents.
+  var subscription = Meteor.subscribe('Courses');
+  return {
+    courses: Courses.find({}).fetch(),
+    ready: subscription.ready()
+  };
+})(ListCourses));
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 },"NotFound.jsx":function(require,exports,module){
@@ -1302,7 +1405,32 @@ function (_React$Component) {
 }(React.Component);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}}}}},{
+}}}},"client":{"style.css":function(){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// client/style.css                                                                                                //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+// These styles have already been applied to the document.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"main.js":function(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                 //
+// client/main.js                                                                                                  //
+//                                                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                   //
+module.watch(require("/imports/startup/both"));
+module.watch(require("../imports/startup/client/"));
+module.watch(require("./style.css"));
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}}},{
   "extensions": [
     ".js",
     ".json",
@@ -1311,5 +1439,4 @@ function (_React$Component) {
     ".jsx"
   ]
 });
-require("/client/template.main.js");
 require("/client/main.js");
