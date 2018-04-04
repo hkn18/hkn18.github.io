@@ -10,13 +10,14 @@
 }
 
 .mainImage{
-  background: url("http://murphyshawaii.com/media/2014/04/murphys-front.jpg") no-repeat;
+  background: url("../public/team.jpg") no-repeat;
   min-height: 500px;
   padding-top: 8em;
+  background-size: cover;
 }
 
 h1, h2, h3, p, a {
-  color: white;
+  color: black;
 }
 
 .footer {

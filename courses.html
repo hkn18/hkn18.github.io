@@ -10,14 +10,28 @@
 
 <body>
 
+<!-- Navbar -->
 <div class="ui borderless topmenu menu white">
-  <a class="item" style="font-size: 24px;">HKN18</a>
+  <a class="item" style="font-size: 24px;" href="index.html">HKN18</a>
   <a class="right item" href="./about.html">About Us</a>
   <a class="item" href="./courses.html">Courses</a>
 </div>
 
+<div class="ui container">
 
+  <div class="ui accordion">
+    <div class="title">
+      <i class="dropdown icon"></i>
+      What is a dog?
+    </div>
+    <div class="content">
+      <p>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
+    </div>
+  </div>
 
+</div>
+
+<!-- Footer -->
 <div class="ui container">
   <hr>
   <p style="text-align:center; color: black;">
@@ -27,3 +41,8 @@
 </div>
 
 </body>
+
+<script>
+  $('.ui.accordion')
+      .accordion();
+</script>
