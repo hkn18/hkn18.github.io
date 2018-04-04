@@ -1,0 +1,26 @@
+.ui.borderless.topmenu{
+  border: 0;
+  box-shadow: 0 0;
+  border-radius: 0 0;
+  background: #21ba45;
+  margin-bottom: 3em;
+}
+
+.ui.borderless.topmenu p{
+  color: white;
+  font-size: 24px;
+}
+
+.mainImage{
+  background: url("/team.jpg") no-repeat;
+  min-height: 500px;
+  background-size: cover;
+}
+
+h1, h2, h3, p, a {
+  color: black;
+}
+
+.footer {
+  margin-top: 3em;
+}
