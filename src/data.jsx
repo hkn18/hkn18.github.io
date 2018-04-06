@@ -25,9 +25,16 @@ export default {
       ]
     },
     {
-      jobType: "Bin Man",
-      desc: "Collects bins"
-    }
+      course: "Math 242/252",
+      desc: "Calc 2",
+      pre: "",
+      resources: [
+        "http://ocw.uci.edu/courses/math_2a_calculus_i.html",
+        "http://ocw.uci.edu/courses/math_2b_calculus.html",
+        "https://ocw.mit.edu/courses/mathematics/18-01-single-variable-calculus-fall-2006/"
+      ]
+    },
+
   ],
   physics: [
     {

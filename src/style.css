@@ -17,6 +17,14 @@
   background-size: cover;
 }
 
+.aboutImage {
+  min-height: 300px;
+}
+
+.courseTable {
+  margin-top: 3em;
+}
+
 h1, h2, h3, p, a {
   color: black;
 }
