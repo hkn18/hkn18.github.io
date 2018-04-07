@@ -22,14 +22,6 @@ class TopMenu extends React.Component {
   }
 }
 
-class Home extends React.Component {
-  render() {
-    return (
-        <Image fluid src="team.jpg"/>
-    )
-  }
-}
-
 class Footer extends React.Component {
   render() {
     const lowerStyle = { color:"black", textAlign: "center" };
@@ -83,9 +75,6 @@ class Subjects extends React.Component {
                     <Card.Header>
                       {subject.title}
                     </Card.Header>
-                    {/*<Card.Description>*/}
-                    {/*{this.props.contact.description}*/}
-                    {/*</Card.Description>*/}
                   </Card.Content>
                 </Card>
             )}
@@ -95,11 +84,39 @@ class Subjects extends React.Component {
   }
 }
 
-class Math extends React.Component {
+class Home extends React.Component {
   render() {
+    const center = { textAlign: 'center', marginTop: '0.4em' };
+    const mBot = { textAlign: 'center', marginBottom: '0em' };
+    const hrRule = {marginBottom: '1em'};
+    return (
+        <Container>
+          <Image fluid src="teamCrop.jpg"/>
+          <div className='homeContent'>
+            <h1 style={mBot}>
+              We are the Fourier Five
+            </h1>
+            <h3 style={center}>
+              Charles "Chuck" Wolstein, Sasha Yamada, Sean Teramae, Hidemasa "Vincent" Mitsui, and Huy Lam.
+            </h3>
+            <h1>
+              Subjects
+            </h1>
+            <hr style={hrRule} />
+            <Subjects/>
+          </div>
+        </Container>
+    )
+  }
+}
+
+class ListCourses extends React.Component {
+  render() {
+    let extension = this.props.location.pathname;
+    extension = extension.slice(1);
     return (
       <Container>
-        {Data['math'].map((course) =>
+        {Data.hasOwnProperty(extension)? (Data[extension].map((course) =>
             <div className="courseTable">
               <h2>
                 {course.course}
@@ -120,10 +137,9 @@ class Math extends React.Component {
                       <Table.Cell><Icon name='external square'/><a href={resource}>{resource}</a></Table.Cell>
                   </Table.Row>
                 )}
-
               </Table>
             </div>
-        )}
+        )) : null}
       </Container>
     );
   }
@@ -140,7 +156,9 @@ class App extends React.Component {
               <Route exact path="/" component={Home}/>
               <Route exact path="/about" component={About}/>
               <Route exact path="/subjects" component={Subjects}/>
-              <Route exact path="/math" component={Math}/>
+              <Route exact path="/math" component={ListCourses}/>
+              <Route exact path="/physics" component={ListCourses}/>
+              <Route exact path="/ee-core" component={ListCourses}/>
             </Switch>
             <Footer/>
           </div>
