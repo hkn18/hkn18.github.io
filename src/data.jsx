@@ -114,7 +114,7 @@ export default {
         "https://www.khanacademy.org/science/physics"
       ]
     },
-  ]
+  ],
   chemistry: [
     {
       course: "CHEM 161",
@@ -135,6 +135,96 @@ export default {
         "https://www.khanacademy.org/science/chemistry"
       ]
     },
+  ],
+  eecore: [
+    {
+      course: "EE 160",
+      desc: "C Programming",
+      pre: "MATH 241/251A (concurr.)",
+      resources: [
+        "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-087-practical-programming-in-c-january-iap-2010/lecture-notes/",
+        "https://www.cs.fsu.edu/~myers/c++/notes/references.html",
+        "https://www.youtube.com/watch?v=ASVB8KAFypk"
+      ]
+    },
+    {
+      course: "EE 260",
+      desc: "Intro to digital design",
+      pre: "EE 160",
+      resources: [
+        "http://www.robotroom.com/NumberSystems2.html",
+        "https://www.youtube.com/watch?v=ChtmE09BSy0&list=PLBlnK6fEyqRjMH3mWf6kwqiTbT798eAOm&index=78",
+        "https://www.youtube.com/watch?v=t5Bco6PSAkM",
+        "https://www.youtube.com/watch?v=vOFeSu6Zr94",
+        "https://allaboutfpga.com/vhdl-component-port-map-tutorial/"
+      ]
+    },
+    {
+      course: "EE 211",
+      desc: "Basic circuit analysis 1",
+      pre: "MATH 243/252A (concurr.), PHYS 272 (concurr.)",
+      resources: [
+        "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-002-circuits-and-electronics-spring-2007/",
+        "https://www.youtube.com/watch?v=fHaqiX3DJwQ&list=PL1-PpkqcSWX4qNiSxizLIZK_hogj34UxX",
+        "https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic",
+        "https://www.youtube.com/watch?v=vOFeSu6Zr94",
+        "http://www.falstad.com/circuit/"
+      ]
+    },
+    {
+      course: "EE 213",
+      desc: "Basic circuit analysis 2",
+      pre: "EE 211, MATH 244/253A (concurr.)",
+      resources: [
+        "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-002-circuits-and-electronics-spring-2007/",
+        "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-094-introduction-to-matlab-january-iap-2010/",
+        "http://www.falstad.com/circuit/"
+      ]
+    },
+    {
+      course: "EE 323",
+      desc: "Microelectronic circuits 1",
+      pre: "EE 213",
+      resources: [
+        "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-012-microelectronic-devices-and-circuits-spring-2009/",
+        "https://www.youtube.com/channel/UCtWjkj7Vk5aN1V78lqYZ8Vw",
+        "http://www.falstad.com/circuit/",
+        "http://www.linear.com/designtools/software/"
+      ]
+    },
+    {
+      course: "EE 315",
+      desc: "Signals and systems ",
+      pre: "EE 213, MATH 244/253A",
+      resources: [
+        "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-003-signals-and-systems-fall-2011/",
+        "https://www.khanacademy.org/science/electrical-engineering/ee-signals"
+      ]
+    },
+    {
+      course: "EE 324",
+      desc: "Semiconductor physics",
+      pre: "MATH 243/253A, PHYS 274",
+      resources: [
+        "https://ocw.mit.edu/courses/materials-science-and-engineering/3-225-electronic-and-mechanical-properties-of-materials-fall-2007/lecture-notes/"
+      ]
+    },
+    {
+      course: "EE 371",
+      desc: "Electromagnetics 1",
+      pre: "EE 213",
+      resources: [
+        "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-013-electromagnetics-and-applications-spring-2009/",
+        "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-013-electromagnetics-and-applications-fall-2005/index.htm"
+      ]
+    },
+    {
+      course: "EE 342",
+      desc: "Probability and statistics ",
+      pre: "EE 315 (concurr.), MATH 244/253A",
+      resources: [
+        "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/"
+      ]
+    },
   ]
-
 };
