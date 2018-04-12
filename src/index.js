@@ -69,8 +69,8 @@ class Subjects extends React.Component {
     return (
         <Container>
           <Card.Group>
-            {Data.subjects.map((subject) =>
-                <Card centered as={NavLink} exact to={"/" + subject.url}>
+            {Data.subjects.map((subject, index) =>
+                <Card centered as={NavLink} exact to={"/" + subject.url} key={index}>
                   <Card.Content>
                     <Card.Header>
                       {subject.title}
@@ -111,13 +111,17 @@ class Home extends React.Component {
 }
 
 class ListCourses extends React.Component {
+  componentDidMount() {
+    window.scrollTo(0,0);
+  }
+
   render() {
     let extension = this.props.location.pathname;
     extension = extension.slice(1);
     return (
       <Container>
-        {Data.hasOwnProperty(extension)? (Data[extension].map((course) =>
-            <div className="courseTable">
+        {Data.hasOwnProperty(extension)? (Data[extension].map((course, index) =>
+            <div className="courseTable" key={index}>
               <h2>
                 {course.course}
               </h2>
@@ -132,7 +136,7 @@ class ListCourses extends React.Component {
                 {course.resources.map((resource, index) =>
                   <Table.Row>
                       <Table.Cell>
-                        {index}
+                        {course.hasOwnProperty('description')? course.description[index] : index }
                       </Table.Cell>
                       <Table.Cell><Icon name='external square'/><a href={resource}>{resource}</a></Table.Cell>
                   </Table.Row>
@@ -157,8 +161,13 @@ class App extends React.Component {
               <Route exact path="/about" component={About}/>
               <Route exact path="/subjects" component={Subjects}/>
               <Route exact path="/math" component={ListCourses}/>
+              <Route exact path="/chemistry" component={ListCourses}/>
               <Route exact path="/physics" component={ListCourses}/>
-              <Route exact path="/ee-core" component={ListCourses}/>
+              <Route exact path="/eecore" component={ListCourses}/>
+              <Route exact path="/computer" component={ListCourses}/>
+              <Route exact path="/system" component={ListCourses}/>
+              <Route exact path="/x96" component={ListCourses}/>
+              <Route exact path="/ep" component={ListCourses}/>
             </Switch>
             <Footer/>
           </div>
