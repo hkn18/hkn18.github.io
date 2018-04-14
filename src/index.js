@@ -86,7 +86,7 @@ class Subjects extends React.Component {
 
 class Home extends React.Component {
   render() {
-    const center = { textAlign: 'center', marginTop: '0.4em' };
+    // const center = { textAlign: 'center', marginTop: '0.4em' };
     const mBot = {
       textAlign: 'center',
       marginBottom: '0em',

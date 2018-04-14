@@ -212,9 +212,10 @@ export default {
       ],
       description: [
         "MIT OCW Circuits and Electronics",
-	"rolinychupetin - Circuits and Electronics",
-	"Khan Academy Circuit Analysis",
-	"Falstad - Online Circuit Simulator"
+	      "rolinychupetin - Circuits and Electronics",
+	      "Khan Academy Circuit Analysis",
+        "Implementation of Boolean Function using Multiplexers",
+	      "Falstad - Online Circuit Simulator"
       ]
     },
     {
@@ -228,8 +229,8 @@ export default {
       ],
       description: [
         "MIT OCW Circuits and Electronics",
-	"MIT OCW Intro to MATLAB",
-	"Falstad - Online Circuit Simulator"
+	      "MIT OCW Intro to MATLAB",
+	      "Falstad - Online Circuit Simulator"
       ]
     },
     {
@@ -683,7 +684,7 @@ export default {
   ],
   x96: [
     {
-      course: "EE X96",
+      course: "EE X96 - Graphene Photodetector",
       desc: "Graphene Photodetector",
       adv: "David Garmire",
       resources: [
@@ -693,19 +694,19 @@ export default {
         "EE X96 - Graphene Photodetector - Hawaii Nanoelectronic Devices Lab"
       ]
     },
+    // {
+    //   course: "EE X96 - Micromouse",
+    //   desc: "Micromouse",
+    //   adv: "Tep Dobry",
+    //   resources: [
+    //     ""
+    //   ],
+    //   description: [
+    //     ""
+    //   ]
+    // },
     {
-      course: "EE X96",
-      desc: "Micromouse",
-      adv: "Tep Dobry",
-      resources: [
-        ""
-      ],
-      description: [
-        ""
-      ]
-    },
-    {
-      course: "EE X96",
+      course: "EE X96 - Liquid Metal",
       desc: "Liquid Metal",
       adv: "Aaron Ohta, Wayne Shiroma",
       resources: [
@@ -716,7 +717,7 @@ export default {
       ]
     },
     {
-      course: "EE X96",
+      course: "EE X96 - Smart Campus Energy Lab",
       desc: "SCEL",
       adv: "Anthony Kuh",
       resources: [
@@ -727,7 +728,7 @@ export default {
       ]
     },
     {
-      course: "EE X96",
+      course: "EE X96 - Microrobotics",
       desc: "Microrobotics",
       adv: "Aaron Ohta",
       resources: [
