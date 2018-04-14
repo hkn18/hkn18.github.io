@@ -245,10 +245,10 @@ export default {
       ],
       description: [
         "Robotroom - Conversion (BINARY/OCTO/HEX)",
-	"Neso Academy - NAND Gates",
-	"Practical Ninja - K-Maps"
-	"NESO Academy - Multiplexer",
-	"AllAboutFPGA - Port Map"
+        "Neso Academy - NAND Gates",
+        "Practical Ninja - K-Maps",
+        "NESO Academy - Multiplexer",
+        "AllAboutFPGA - Port Map"
       ]
     },
     {
@@ -469,17 +469,17 @@ export default {
         "MIT OCW - Optics"
       ]
     },
-    {
-      course: "EE 471",
-      desc: "Computational electromagnetics",
-      pre: "EE 371",
-      resources: [
-        ""
-      ],
-      description: [
-        ""
-      ]
-    },
+    // {
+    //   course: "EE 471",
+    //   desc: "Computational electromagnetics",
+    //   pre: "EE 371",
+    //   resources: [
+    //     ""
+    //   ],
+    //   description: [
+    //     ""
+    //   ]
+    // },
     {
       course: "EE 473",
       desc: "Microwave engineering",

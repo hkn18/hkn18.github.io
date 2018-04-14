@@ -41,7 +41,7 @@ class About extends React.Component {
   render(){
     return(
         <Container>
-          <Card.Group>
+          <Card.Group itemsPerRow={3}>
             {Team.map((person) =>
                 <Card>
                   <Image className="aboutImage" src={person.image}/>
@@ -87,18 +87,23 @@ class Subjects extends React.Component {
 class Home extends React.Component {
   render() {
     const center = { textAlign: 'center', marginTop: '0.4em' };
-    const mBot = { textAlign: 'center', marginBottom: '0em' };
+    const mBot = {
+      textAlign: 'center',
+      marginBottom: '0em',
+      fontSize: '5em',
+      color: '#207133'
+    };
     const hrRule = {marginBottom: '1em'};
     return (
         <Container>
-          <Image fluid src="teamCrop.jpg"/>
+          {/*<Image fluid src="teamCrop.jpg"/>*/}
           <div className='homeContent'>
             <h1 style={mBot}>
-              We are the Fourier Five
+              University of Hawai'i at Manoa<br/>EE Course Guide
             </h1>
-            <h3 style={center}>
-              Charles "Chuck" Wolstein, Sasha Yamada, Sean Teramae, Hidemasa "Vincent" Mitsui, and Huy Lam.
-            </h3>
+            {/*<h3 style={center}>*/}
+              {/*By Charles "Chuck" Wolstein, Sasha Yamada, Sean Teramae, Hidemasa "Vincent" Mitsui, and Huy Lam.*/}
+            {/*</h3>*/}
             <h1>
               Subjects
             </h1>
